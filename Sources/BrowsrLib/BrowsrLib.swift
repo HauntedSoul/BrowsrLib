@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-public struct BrowsrLib {se
+public struct BrowsrLib {
     
     /// Authenticate with Github
     ///  ~NOT NEEDED~
@@ -83,10 +83,10 @@ public struct BrowsrLib {se
                 }
                 if let data = data {
                     do {
-                        let decodedData = try JSONDecoder().decode([Organization].self, from: data)
-                        promise(.success(decodedData))
+                        let decodedData = try JSONDecoder().decode(SearchResponse.self, from: data)
+                        promise(.success(decodedData.items))
                     } catch {
-                        print("Error: JSON encoding failed")
+                        print("Error: JSON decoding failed")
                         promise(.failure(.decodeJSONError))
                     }
                 }
@@ -95,3 +95,14 @@ public struct BrowsrLib {se
     }
 }
 
+struct SearchResponse: Codable {
+    let totalCount: Int
+    let incompleteResults: Bool
+    let items: [Organization]
+    
+    enum CodingKeys: String, CodingKey {
+        case totalCount = "total_count"
+        case incompleteResults = "incomplete_results"
+        case items
+    }
+}
