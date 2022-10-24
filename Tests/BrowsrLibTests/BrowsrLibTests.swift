@@ -47,7 +47,7 @@ final class BrowsrLibTests: XCTestCase {
         
         let expectation = expectation(description: "Organizations Searched")
         
-        BrowsrLib.searchOrganizations(search: "")
+        BrowsrLib.searchOrganizations(search: "github")
             .sink { result in
                 switch result {
                 case .failure(let resultError):

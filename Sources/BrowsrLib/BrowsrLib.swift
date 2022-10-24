@@ -49,8 +49,8 @@ public struct BrowsrLib {
                     do {
                         let decodedData = try JSONDecoder().decode([Organization].self, from: data)
                         promise(.success(decodedData))
-                    } catch {
-                        print("Error: JSON encoding failed")
+                    } catch let error {
+                        print("Error: JSON decoding failed - \(error.localizedDescription)")
                         promise(.failure(.decodeJSONError))
                     }
                 }
@@ -74,6 +74,7 @@ public struct BrowsrLib {
                 promise(.failure(.badURL))
                 return
             }
+            print("**** URL - \(url.absoluteString)")
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             
@@ -82,11 +83,13 @@ public struct BrowsrLib {
                     print("Error: \(error.localizedDescription)")
                 }
                 if let data = data {
+                    let test = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+//                    print("****** TEST --- \(test)")
                     do {
                         let decodedData = try JSONDecoder().decode(SearchResponse.self, from: data)
                         promise(.success(decodedData.items))
-                    } catch {
-                        print("Error: JSON decoding failed")
+                    } catch let error {
+                        print("Error: JSON decoding failed - \(error.localizedDescription)")
                         promise(.failure(.decodeJSONError))
                     }
                 }
@@ -96,7 +99,7 @@ public struct BrowsrLib {
 }
 
 struct SearchResponse: Codable {
-    let totalCount: Int
+    let totalCount: Int64
     let incompleteResults: Bool
     let items: [Organization]
     
