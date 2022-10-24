@@ -8,14 +8,14 @@
 import Foundation
 
 public struct Organization: Codable {
-    let login: String
-    let id: Int
-    let nodeID: String
-    let url, reposURL, eventsURL, hooksURL: String
-    let issuesURL: String
-    let membersURL, publicMembersURL: String
-    let avatarURL: String
-    let welcomeDescription: String?
+    public let login: String
+    public let id: Int
+    public let nodeID: String
+    public let url, reposURL, eventsURL, hooksURL: String
+    public let issuesURL: String
+    public let membersURL, publicMembersURL: String
+    public let avatarURL: String
+    public let welcomeDescription: String?
     
     enum CodingKeys: String, CodingKey {
         case login, id
