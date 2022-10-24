@@ -18,5 +18,5 @@ public enum GetOrganizationsError: Error {
 public enum SearchOrganizationsError: Error {
     case badURL
     case notModified
-    case decodeError
+    case decodeJSONError
 }

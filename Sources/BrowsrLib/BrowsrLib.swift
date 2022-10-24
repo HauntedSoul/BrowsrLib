@@ -2,10 +2,6 @@ import Foundation
 import Combine
 
 public struct BrowsrLib {
-
-    public init() {
-        print("====== BROWSR LIB STARTING ======")
-    }
     
     /// Authenticate with Github
     ///  ~NOT NEEDED~
@@ -65,14 +61,36 @@ public struct BrowsrLib {
     // example https://api.github.com/search/users?q=anon+type:org
     // sort example: https://api.github.com/search/users?q=anon+type:org&sort=login&order=asc
     
-    func searchOrganizations(search: String) -> Future<[Organization], SearchOrganizationsError> {
+    static public func searchOrganizations(search: String) -> Future<[Organization], SearchOrganizationsError> {
         return Future<[Organization], SearchOrganizationsError> { promise in
             guard var urlComponents = URLComponents(string: "https://api.github.com/search/users") else {
                 promise(.failure(.badURL))
                 return
             }
-            var queryItems = [URLQueryItem(name: "q", value: "\(search)+type:org")]
+            let queryItems = [URLQueryItem(name: "q", value: "\(search)+type:org")]
+            urlComponents.queryItems = queryItems
             
+            guard let url = urlComponents.url else {
+                promise(.failure(.badURL))
+                return
+            }
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                }
+                if let data = data {
+                    do {
+                        let decodedData = try JSONDecoder().decode([Organization].self, from: data)
+                        promise(.success(decodedData))
+                    } catch {
+                        print("Error: JSON encoding failed")
+                        promise(.failure(.decodeJSONError))
+                    }
+                }
+            }.resume()
         }
     }
 }
