@@ -25,7 +25,7 @@ final class BrowsrLibTests: XCTestCase {
         
         let expectation = expectation(description: "Organizations Fetched")
         
-        browsrlLib.getOrganizations()
+        BrowsrLib.getOrganizations()
             .sink { result in
                 switch result {
                 case .failure(let resultError):
