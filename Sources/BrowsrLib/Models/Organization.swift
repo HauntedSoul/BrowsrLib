@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Organization: Codable {
+public struct Organization: Codable {
     let login: String
     let id: Int
     let nodeID: String
