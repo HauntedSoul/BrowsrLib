@@ -9,7 +9,7 @@ import Foundation
 
 public struct Organization: Codable {
     public let login: String
-    public let id: Int
+    public let id: Int64
     public let nodeID: String
     public let url, reposURL, eventsURL, hooksURL: String
     public let issuesURL: String
