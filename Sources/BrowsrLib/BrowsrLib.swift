@@ -77,16 +77,3 @@ public struct BrowsrLib {
     }
 }
 
-
-enum GetOrganizationsError: Error {
-    case badURL
-    case notModified
-    case decodeDataError
-    case decodeJSONError
-}
-
-enum SearchOrganizationsError: Error {
-    case badURL
-    case notModified
-    case decodeError
-}
