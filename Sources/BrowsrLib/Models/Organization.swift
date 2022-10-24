@@ -15,7 +15,7 @@ public struct Organization: Codable {
     public let issuesURL: String
     public let membersURL, publicMembersURL: String
     public let avatarURL: String
-    public let welcomeDescription: String?
+    public let organizationDescription: String?
     
     enum CodingKeys: String, CodingKey {
         case login, id
@@ -28,6 +28,6 @@ public struct Organization: Codable {
         case membersURL = "members_url"
         case publicMembersURL = "public_members_url"
         case avatarURL = "avatar_url"
-        case welcomeDescription = "description"
+        case organizationDescription = "description"
     }
 }
