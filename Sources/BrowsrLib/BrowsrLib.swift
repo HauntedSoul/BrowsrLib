@@ -20,7 +20,7 @@ public struct BrowsrLib {
     ///       an ID greater than this ID.
     ///     - pageSize: The number of results per page (max 100).
     ///       Default: 30
-    func getOrganizations(since: Int64? = nil, pageSize: Int64? = nil) -> Future<[Organization], GetOrganizationsError> {
+    static public func getOrganizations(since: Int64? = nil, pageSize: Int64? = nil) -> Future<[Organization], GetOrganizationsError> {
         return Future<[Organization], GetOrganizationsError> { promise in
             guard var urlComponents = URLComponents(string: "https://api.github.com/organizations") else {
                 promise(.failure(.badURL))
