@@ -14,7 +14,7 @@ public struct Organization: Codable {
     public let url, reposURL, eventsURL, hooksURL: String?
     public let issuesURL: String?
     public let membersURL, publicMembersURL: String?
-    public let avatarURL: String?
+    public let avatarURL: String
     public let organizationDescription: String?
     
     enum CodingKeys: String, CodingKey {

@@ -58,8 +58,12 @@ public struct BrowsrLib {
         }
     }
     
-    // example https://api.github.com/search/users?q=anon+type:org
-    // sort example: https://api.github.com/search/users?q=anon+type:org&sort=login&order=asc
+    /// Searches for organizations with the search input.
+    ///  [Source](https://docs.github.com/en/rest/search#constructing-a-search-query)
+    /// - Parameters:
+    ///     - search: The search input with which the search will be performed.
+    /// example https://api.github.com/search/users?q=anon+type:org
+    /// sort example: https://api.github.com/search/users?q=anon+type:org&sort=login&order=asc
     
     static public func searchOrganizations(search: String) -> Future<[Organization], SearchOrganizationsError> {
         return Future<[Organization], SearchOrganizationsError> { promise in
@@ -74,7 +78,7 @@ public struct BrowsrLib {
                 promise(.failure(.badURL))
                 return
             }
-            print("**** URL - \(url.absoluteString)")
+            
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             
@@ -83,8 +87,6 @@ public struct BrowsrLib {
                     print("Error: \(error.localizedDescription)")
                 }
                 if let data = data {
-                    let test = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-//                    print("****** TEST --- \(test)")
                     do {
                         let decodedData = try JSONDecoder().decode(SearchResponse.self, from: data)
                         promise(.success(decodedData.items))
