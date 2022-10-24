@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-public struct BrowsrLib {
+public struct BrowsrLib {se
     
     /// Authenticate with Github
     ///  ~NOT NEEDED~
