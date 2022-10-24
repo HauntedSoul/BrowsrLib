@@ -78,47 +78,6 @@ public struct BrowsrLib {
 }
 
 
-/*
- {
- "login": "caring",
- "id": 3428,
- "node_id": "MDEyOk9yZ2FuaXphdGlvbjM0Mjg=",
- "url": "https://api.github.com/orgs/caring",
- "repos_url": "https://api.github.com/orgs/caring/repos",
- "events_url": "https://api.github.com/orgs/caring/events",
- "hooks_url": "https://api.github.com/orgs/caring/hooks",
- "issues_url": "https://api.github.com/orgs/caring/issues",
- "members_url": "https://api.github.com/orgs/caring/members{/member}",
- "public_members_url": "https://api.github.com/orgs/caring/public_members{/member}",
- "avatar_url": "https://avatars.githubusercontent.com/u/3428?v=4",
- "description": ""
- }
- */
-struct Organization: Codable {
-    let login: String
-    let id: Int
-    let nodeID: String
-    let url, reposURL, eventsURL, hooksURL: String
-    let issuesURL: String
-    let membersURL, publicMembersURL: String
-    let avatarURL: String
-//    let welcomeDescription: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case login, id
-        case nodeID = "node_id"
-        case url
-        case reposURL = "repos_url"
-        case eventsURL = "events_url"
-        case hooksURL = "hooks_url"
-        case issuesURL = "issues_url"
-        case membersURL = "members_url"
-        case publicMembersURL = "public_members_url"
-        case avatarURL = "avatar_url"
-//        case welcomeDescription = "description"
-    }
-}
-
 enum GetOrganizationsError: Error {
     case badURL
     case notModified
